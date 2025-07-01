@@ -123,18 +123,20 @@ test('Test date functions', () => {
             'I am a log message!',
             fixedDateFunction('2023-09-06T00:00:00Z'),
         ),
-        '2023-09-06T00:00:00.000Z : I am a log message!'
+        '2023-09-06T00:00:00.000Z : I am a log message!',
     )
 
     // Test that the testDateFunction returns the test date
     assert.deepStrictEqual(
         logger.prepareLogMessage('I am a log message!', testDateFunction),
-        `${testDateString} : I am a log message!`
+        `${testDateString} : I am a log message!`,
     )
 
     // Test that calling prepareLogMessage without a dateFunction argument does not run into an error
     assert.ok(
-        logger.prepareLogMessage('I am a log message!').includes('I am a log message!')
+        logger
+            .prepareLogMessage('I am a log message!')
+            .includes('I am a log message!'),
     )
 })
 
@@ -145,55 +147,55 @@ test('Test fetch functions', async () => {
             '1',
             fixedResponseFetchFunction('John Doe', { status: 200 }),
         ),
-        'User John Doe'
+        'User John Doe',
     )
 
     // Test that badRequestFetchFunction is handled properly
     assert.deepStrictEqual(
         await getUserById('1', badRequestFetchFunction),
-        'User was not found. Status is 400'
+        'User was not found. Status is 400',
     )
 
     // Test that notFoundFetchFunction is handled properly
     assert.deepStrictEqual(
         await getUserById('1', notFoundFetchFunction),
-        'User was not found. Status is 404'
+        'User was not found. Status is 404',
     )
 
     // Test that internalServerErrorFetchFunction is handled properly
     assert.deepStrictEqual(
         await getUserById('1', internalServerErrorFetchFunction),
-        'User was not found. Status is 500'
+        'User was not found. Status is 500',
     )
 
     // Test that timeoutFetchFunction is handled properly
     assert.deepStrictEqual(
         await getUserById('1', timeoutFetchFunction),
-        'Error: Error: Connection failed ETIMEDOUT'
+        'Error: Error: Connection failed ETIMEDOUT',
     )
 
     // Test that aggregateErrorFetchFunction is handled properly
     assert.deepStrictEqual(
         await getUserById('1', aggregateErrorFetchFunction),
-        'User {"errors":[{"message":"aaa The first error!, The second error!", "originalError": {"errors": [{"message":"The first error!"}, {"message":"The second error!"}  ] }  }]}'
+        'User {"errors":[{"message":"aaa The first error!, The second error!", "originalError": {"errors": [{"message":"The first error!"}, {"message":"The second error!"}  ] }  }]}',
     )
 
     // Test that graphQLIntrospectionDisabledFetchFunction is handled properly
     assert.deepStrictEqual(
         await getUserById('1', graphQLIntrospectionDisabledFetchFunction),
-        'User {"errors": [ { "message": "Introspection is disabled"}],"data": null}'
+        'User {"errors": [ { "message": "Introspection is disabled"}],"data": null}',
     )
 
     // Test that graphQLInvalidSchemaFetchFunction is handled properly
     assert.deepStrictEqual(
         await getUserById('1', graphQLInvalidSchemaFetchFunction),
-        'User {"data": {"__schema":"NotAGraphQLSchema", "_service": {"sdl":"NotAGraphQLSchema"}}}'
+        'User {"data": {"__schema":"NotAGraphQLSchema", "_service": {"sdl":"NotAGraphQLSchema"}}}',
     )
 
     // Test that graphQLInvalidBodyFetchFunction is handled properly
     assert.deepStrictEqual(
         await getUserById('1', graphQLInvalidBodyFetchFunction),
-        'User {"message": "I am not GraphQL!"}'
+        'User {"message": "I am not GraphQL!"}',
     )
 
     // Test that fixedResponseFetchFunction with a JSON response return the correct response
@@ -208,7 +210,7 @@ test('Test fetch functions', async () => {
                 },
             ),
         ),
-        { data: { message: 'Hello world!' } }
+        { data: { message: 'Hello world!' } },
     )
 
     // Test that brokenJSONFetchFunction is handled properly
@@ -218,7 +220,7 @@ test('Test fetch functions', async () => {
     // Test that unknownContentTypeFetchFunction is handled properly
     assert.deepStrictEqual(
         await getJSONMessage(unknownContentTypeFetchFunction),
-        { data: { message: 'Error: Content-Type is not application/json' } }
+        { data: { message: 'Error: Content-Type is not application/json' } },
     )
 })
 
@@ -226,7 +228,7 @@ test('Test exit functions', () => {
     // Test that doNotExitFunction does not exit and returns the correct error message
     assert.throws(
         () => doNotExitFunction(1),
-        /Exit function was called with code 1/
+        /Exit function was called with code 1/,
     )
 })
 
@@ -238,7 +240,7 @@ test('Test timeout functions', () => {
             () => logger.log('This should not be executed!'),
             1000,
         ),
-        1
+        1,
     )
     // Log call in callback function should not be executed
     assert.deepStrictEqual(logger.logEntries.length, 0)
