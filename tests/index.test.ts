@@ -1,3 +1,9 @@
+import type {
+    DateFunction,
+    ExitFunction,
+    FetchFunction,
+    TimeoutFunction,
+} from '@/index' // eslint-disable-line @typescript-eslint/no-duplicate-imports
 import {
     aggregateErrorFetchFunction,
     badRequestFetchFunction,
@@ -16,13 +22,6 @@ import {
     testDateString,
     timeoutFetchFunction,
     unknownContentTypeFetchFunction,
-} from '@/index'
-// eslint-disable-next-line @typescript-eslint/no-duplicate-imports
-import type {
-    DateFunction,
-    ExitFunction,
-    FetchFunction,
-    TimeoutFunction,
 } from '@/index'
 import assert from 'node:assert'
 import { test } from 'node:test'
