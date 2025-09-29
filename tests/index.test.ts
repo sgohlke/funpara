@@ -3,7 +3,7 @@ import type {
     ExitFunction,
     FetchFunction,
     TimeoutFunction,
-} from '@/index' // eslint-disable-line @typescript-eslint/no-duplicate-imports
+} from '@/index'
 import {
     aggregateErrorFetchFunction,
     badRequestFetchFunction,
@@ -22,7 +22,7 @@ import {
     testDateString,
     timeoutFetchFunction,
     unknownContentTypeFetchFunction,
-} from '@/index'
+} from '@/index' // eslint-disable-line @typescript-eslint/no-duplicate-imports
 import assert from 'node:assert'
 import { test } from 'node:test'
 
