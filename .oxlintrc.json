@@ -50,6 +50,7 @@
         "import/no-cycle": "error",
         "import/no-default-export": "error",
         "import/no-dynamic-require": "error",
+        "import/no-named-export": "off",
         "import/unambiguous": "error",
         "jsdoc/empty-tags": "error",
         "oxc/bad-bitwise-operator": "error",
