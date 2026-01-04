@@ -45,7 +45,7 @@ class Logger {
     }
 
     /**
-     * prepareLogMessage prepares the log message and returns it as a string.
+     * PrepareLogMessage prepares the log message and returns it as a string.
      * This will make it easier to test the output without having to spy on
      * the console.log function.
      */
@@ -233,7 +233,7 @@ test('Test exit functions', () => {
 
 test('Test timeout functions', () => {
     const logger = new Logger()
-    // noCallbackTimeoutFunction should return a fixed timeout ID 1
+    // NoCallbackTimeoutFunction should return a fixed timeout ID 1
     assert.deepStrictEqual(
         noCallbackTimeoutFunction(
             () => logger.log('This should not be executed!'),
