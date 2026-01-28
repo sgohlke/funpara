@@ -40,6 +40,7 @@
         "eslint/max-lines-per-function": ["error", 400],
         "eslint/max-params": "off",
         "eslint/max-nested-callbacks": ["error", 5],
+        "eslint/max-statements": ["error", 20],
         "eslint/no-magic-numbers": "off",
         "eslint/no-ternary": "off",
         "eslint/sort-imports": "off",
