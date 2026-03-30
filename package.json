@@ -7,7 +7,7 @@
         "check": "tsc --noEmit --pretty",
         "checkformat": "prettier --check .",
         "format": "prettier --cache --write .",
-        "lint": "oxlint -c .oxlintrc.json",
+        "lint": "oxlint -c .oxlintrc.json --format=default",
         "prepack": "npm run build",
         "test": "node --experimental-test-coverage --import tsx --test tests/index.test.ts"
     },
