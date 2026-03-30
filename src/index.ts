@@ -13,7 +13,7 @@ type DateFunction = () => Date
  * @returns DateFunction function returning the current data
  */
 function nowDateFunction(): DateFunction {
-    return (): Date => new Date()
+  return (): Date => new Date()
 }
 
 /**
@@ -23,7 +23,7 @@ function nowDateFunction(): DateFunction {
  * @returns DateFunction function returning the fixed date
  */
 function fixedDateFunction(dateString: string): DateFunction {
-    return (): Date => new Date(dateString)
+  return (): Date => new Date(dateString)
 }
 
 /**
@@ -45,10 +45,7 @@ const testDateFunction: DateFunction = fixedDateFunction(testDateString)
  * Type for a fetch function that given an input (url, request, etc.) and request init
  * returns a Promise<Response>
  */
-type FetchFunction = (
-    input: string | URL | Request,
-    init?: RequestInit,
-) => Promise<Response>
+type FetchFunction = (input: string | URL | Request, init?: RequestInit) => Promise<Response>
 
 /**
  * Returns a FetchFunction that always returns a fixed response.
@@ -57,99 +54,90 @@ type FetchFunction = (
  * @param init response init
  * @returns FetchFunction function returning the fixed Response
  */
-function fixedResponseFetchFunction(
-    bodyInit?: BodyInit,
-    init?: ResponseInit,
-): FetchFunction {
-    return (): Promise<Response> =>
-        Promise.resolve(new Response(bodyInit, init))
+function fixedResponseFetchFunction(bodyInit?: BodyInit, init?: ResponseInit): FetchFunction {
+  return (): Promise<Response> => Promise.resolve(new Response(bodyInit, init))
 }
 
 /**
  * FetchFunction that returns a fixed Response with and empty body and status 400 (Bad Request).
  */
 const badRequestFetchFunction = fixedResponseFetchFunction(undefined, {
-    status: 400,
+  status: 400,
 })
 
 /**
  * FetchFunction that returns a fixed Response with and empty body and status 404 (Not Found).
  */
-const notFoundFetchFunction: FetchFunction = fixedResponseFetchFunction(
-    undefined,
-    { status: 404 },
-)
+const notFoundFetchFunction: FetchFunction = fixedResponseFetchFunction(undefined, { status: 404 })
 
 /**
  * FetchFunction that returns a fixed Response with and empty body and status 500 (Internal Server Error).
  */
 const internalServerErrorFetchFunction = fixedResponseFetchFunction(undefined, {
-    status: 500,
+  status: 500,
 })
 
 /**
  * FetchFunction that returns a fixed Response with broken JSON (missing bracket)
  */
 const brokenJSONFetchFunction: FetchFunction = fixedResponseFetchFunction(
-    '{"data": {"message": "Missing bracket"}',
-    {
-        headers: { 'Content-Type': 'application/json' },
-        status: 200,
-    },
+  '{"data": {"message": "Missing bracket"}',
+  {
+    headers: { 'Content-Type': 'application/json' },
+    status: 200,
+  },
 )
 
 /**
  * FetchFunction that returns a fixed Response with an unknown
  * Content-Type ('application/unknown')
  */
-const unknownContentTypeFetchFunction: FetchFunction =
-    fixedResponseFetchFunction(undefined, {
-        headers: { 'Content-Type': 'application/unknown' },
-        status: 200,
-    })
+const unknownContentTypeFetchFunction: FetchFunction = fixedResponseFetchFunction(undefined, {
+  headers: { 'Content-Type': 'application/unknown' },
+  status: 200,
+})
 
 /**
  * FetchFunction that returns a fixed Response that throws a Timeout error.
  */
 const timeoutFetchFunction: FetchFunction = (): Promise<Response> =>
-    new Promise<Response>(() => {
-        throw new Error('Connection failed ETIMEDOUT')
-    })
+  new Promise<Response>(() => {
+    throw new Error('Connection failed ETIMEDOUT')
+  })
 
 /**
  * FetchFunction that returns a fixed Response with an AggregateError.
  */
 const aggregateErrorFetchFunction = fixedResponseFetchFunction(
-    '{"errors":[{"message":"aaa The first error!, The second error!", "originalError": {"errors": [{"message":"The first error!"}, {"message":"The second error!"}  ] }  }]}',
-    {
-        headers: { 'Content-Type': 'application/json' },
-        status: 200,
-    },
+  '{"errors":[{"message":"aaa The first error!, The second error!", "originalError": {"errors": [{"message":"The first error!"}, {"message":"The second error!"}  ] }  }]}',
+  {
+    headers: { 'Content-Type': 'application/json' },
+    status: 200,
+  },
 )
 
 /**
  * FetchFunction that returns a fixed Response that GraphQL introspection is disabled.
  */
 const graphQLIntrospectionDisabledFetchFunction = fixedResponseFetchFunction(
-    '{"errors": [ { "message": "Introspection is disabled"}],"data": null}',
-    { status: 200 },
+  '{"errors": [ { "message": "Introspection is disabled"}],"data": null}',
+  { status: 200 },
 )
 
 /**
  * FetchFunction that returns a fixed Response with an invalid GraphQL schema.
  */
 const graphQLInvalidSchemaFetchFunction = fixedResponseFetchFunction(
-    '{"data": {"__schema":"NotAGraphQLSchema", ' +
-        '"_service": {"sdl":"NotAGraphQLSchema"}}}',
-    { status: 200 },
+  '{"data": {"__schema":"NotAGraphQLSchema", "_service": {"sdl":"NotAGraphQLSchema"}}}',
+  { status: 200 },
 )
 
 /**
  * FetchFunction that returns a fixed Response with an invalid GraphQL body.
  */
 const graphQLInvalidBodyFetchFunction = fixedResponseFetchFunction(
-    '{"message": "I am not GraphQL!"}',
-    { status: 200 },
+  '{"message": "I am not GraphQL!"}',
+  { status: 200 },
 )
 
 // Exit function related types and functions
@@ -169,7 +157,7 @@ type ExitFunction = (code: number) => never
  * "Exit function was called with code CODE" where CODE is the given code.
  */
 const doNotExitFunction: ExitFunction = (code: number): never => {
-    throw new Error(`Exit function was called with code ${code}`)
+  throw new Error(`Exit function was called with code ${code}`)
 }
 
 // Timeout function related types and functions
@@ -182,10 +170,10 @@ const doNotExitFunction: ExitFunction = (code: number): never => {
  * @returns {number} The timeout ID as number
  */
 type TimeoutFunction = (
-    handler: TimerHandler,
-    timeout?: number,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ...timeoutArguments: any[]
+  handler: TimerHandler,
+  timeout?: number,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ...timeoutArguments: any[]
 ) => number
 
 /**
@@ -196,23 +184,23 @@ type TimeoutFunction = (
 const noCallbackTimeoutFunction: TimeoutFunction = (): number => 1
 
 export {
-    aggregateErrorFetchFunction,
-    badRequestFetchFunction,
-    brokenJSONFetchFunction,
-    doNotExitFunction,
-    fixedDateFunction,
-    fixedResponseFetchFunction,
-    graphQLIntrospectionDisabledFetchFunction,
-    graphQLInvalidBodyFetchFunction,
-    graphQLInvalidSchemaFetchFunction,
-    internalServerErrorFetchFunction,
-    noCallbackTimeoutFunction,
-    notFoundFetchFunction,
-    nowDateFunction,
-    testDateFunction,
-    testDateString,
-    timeoutFetchFunction,
-    unknownContentTypeFetchFunction,
+  aggregateErrorFetchFunction,
+  badRequestFetchFunction,
+  brokenJSONFetchFunction,
+  doNotExitFunction,
+  fixedDateFunction,
+  fixedResponseFetchFunction,
+  graphQLIntrospectionDisabledFetchFunction,
+  graphQLInvalidBodyFetchFunction,
+  graphQLInvalidSchemaFetchFunction,
+  internalServerErrorFetchFunction,
+  noCallbackTimeoutFunction,
+  notFoundFetchFunction,
+  nowDateFunction,
+  testDateFunction,
+  testDateString,
+  timeoutFetchFunction,
+  unknownContentTypeFetchFunction,
 }
 
 export type { DateFunction, ExitFunction, FetchFunction, TimeoutFunction }
