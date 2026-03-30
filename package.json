@@ -3,7 +3,7 @@
     "version": "1.0.3",
     "description": "Function parameter library for coding and testing",
     "scripts": {
-        "build": "tsup-node",
+        "build": "tsdown",
         "check": "tsc --noEmit --pretty",
         "checkformat": "prettier --check .",
         "format": "prettier --cache --write .",
@@ -47,7 +47,7 @@
         "oxlint": "1.57.0",
         "prettier": "3.8.1",
         "prettier-plugin-organize-imports": "4.3.0",
-        "tsup": "8.5.0",
+        "tsdown": "0.21.7",
         "tsx": "4.21.0",
         "typescript": "6.0.2"
     }
