@@ -128,7 +128,7 @@ const graphQLIntrospectionDisabledFetchFunction = fixedResponseFetchFunction(
  * FetchFunction that returns a fixed Response with an invalid GraphQL schema.
  */
 const graphQLInvalidSchemaFetchFunction = fixedResponseFetchFunction(
-  '{"data": {"__schema":"NotAGraphQLSchema", ' + '"_service": {"sdl":"NotAGraphQLSchema"}}}',
+  '{"data": {"__schema":"NotAGraphQLSchema", "_service": {"sdl":"NotAGraphQLSchema"}}}',
   { status: 200 },
 )
 
