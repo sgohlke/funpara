@@ -7,6 +7,5 @@ export default defineConfig({
   minify: false,
   outDir: 'build',
   sourcemap: true,
-  splitting: true,
   target: ['es2022', 'node24'],
 })

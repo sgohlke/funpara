@@ -1,6 +1,6 @@
 {
   "name": "@sgohlke/funpara",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Function parameter library for coding and testing",
   "keywords": [
     "Date",
@@ -21,14 +21,14 @@
   },
   "type": "module",
   "main": "build/index.cjs",
-  "module": "build/index.js",
-  "types": "build/index.d.ts",
+  "module": "build/index.mjs",
+  "types": "build/index.d.mts",
   "exports": {
     ".": {
-      "types": "./build/index.d.ts",
-      "import": "./build/index.js",
+      "types": "./build/index.d.mts",
+      "import": "./build/index.mjs",
       "require": "./build/index.cjs",
-      "default": "./build/index.js"
+      "default": "./build/index.mjs"
     },
     "./package.json": "./package.json"
   },
