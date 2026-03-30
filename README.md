@@ -20,7 +20,7 @@ Many functions use primitive types and objects as parameters to control the logi
  * "new Date()" often changing the value.
  */
 function createLogMessage(message: string): string {
-    return new Date().toISOString() + ':' + message
+  return new Date().toISOString() + ':' + message
 }
 
 /** *
@@ -30,11 +30,8 @@ function createLogMessage(message: string): string {
  * However, the Date object will contain the Date when the Date is created. For more complicated
  * use cases with multiple "new Date()" calls in the function or forwarding this is not useful.
  */
-function createLogMessageWithDate(
-    message: string,
-    date: Date = new Date(),
-): string {
-    return date.toISOString() + ':' + message
+function createLogMessageWithDate(message: string, date: Date = new Date()): string {
+  return date.toISOString() + ':' + message
 }
 
 /**
@@ -46,11 +43,11 @@ function createLogMessageWithDate(
  * the function can be called at any time with "dateFunction()" to create the current Date.
  */
 function createLogMessageWithDateFunction(
-    message: string,
-    dateFunction: DateFunction = nowDateFunction,
+  message: string,
+  dateFunction: DateFunction = nowDateFunction,
 ): string {
-    // const doSomethingThatTakesLonger = someFunctionCall(dateFunction)
-    return dateFunction().toISOString() + ':' + message
+  // const doSomethingThatTakesLonger = someFunctionCall(dateFunction)
+  return dateFunction().toISOString() + ':' + message
 }
 ```
 
