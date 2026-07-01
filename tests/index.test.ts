@@ -197,7 +197,14 @@ test('Test fetch functions', async () => {
 
 test('Test exit functions', () => {
   // Test that doNotExitFunction does not exit and returns the correct error message
-  assert.throws(() => doNotExitFunction(1), /Exit function was called with code 1/)
+  assert.throws(
+    () => {
+      doNotExitFunction(1)
+    },
+    {
+      message: 'Exit function was called with code 1',
+    },
+  )
 })
 
 test('Test timeout functions', () => {
